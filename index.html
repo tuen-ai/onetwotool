@@ -7,438 +7,98 @@
 <title>THE QUIET WORKDAY · 小時計</title>
 <style>
   :root {
-    --bg: #e8e8e8;
-    --card: #ffffff;
-    --ink: #1a1a1a;
-    --muted: #8a8a8a;
-    --faint: #b0b0b0;
-    --green: #2d5a3d;
-    --green-deep: #244a32;
-    --green-soft: #e8f0eb;
-    --bar-track: #ececec;
-    --radius: 18px;
+    --bg: #e8e8e8; --card: #ffffff; --ink: #1a1a1a; --muted: #8a8a8a; --faint: #b0b0b0;
+    --green: #2d5a3d; --green-deep: #244a32; --bar-track: #ececec; --radius: 18px;
     --shadow: 0 1px 3px rgba(0,0,0,0.04);
     --font: -apple-system, BlinkMacSystemFont, "PingFang HK", "PingFang TC",
             "Hiragino Sans CNS", "Noto Sans TC", "Helvetica Neue", Arial, sans-serif;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html, body {
-    min-height: 100%;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--font);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  body {
-    padding: 20px 16px 48px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .wrap {
-    width: 100%;
-    max-width: 440px;
-  }
-
-  /* Header */
-  .header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 16px;
-    padding: 0 2px;
-  }
-
-  .brand-en {
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    color: var(--muted);
-    font-weight: 500;
-    text-transform: uppercase;
-    line-height: 1.2;
-  }
-
-  .brand-zh {
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--ink);
-    line-height: 1.25;
-    margin-top: 2px;
-  }
-
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: var(--card);
-    border: 1px solid #e0e0e0;
-    border-radius: 999px;
-    padding: 6px 12px;
-    font-size: 12px;
-    color: var(--ink);
-    font-weight: 500;
-    white-space: nowrap;
-    box-shadow: var(--shadow);
-    margin-top: 4px;
-  }
-
-  /* Cards */
-  .card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 20px 20px 18px;
-    box-shadow: var(--shadow);
-    margin-bottom: 14px;
-  }
-
-  .meta-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-
-  .live-clock {
-    font-variant-numeric: tabular-nums;
-    color: var(--faint);
-    font-size: 12px;
-  }
-
-  .countdown {
-    font-size: 48px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    font-variant-numeric: tabular-nums;
-    line-height: 1.1;
-    color: var(--ink);
-  }
-
-  .countdown-sub {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 4px;
-    margin-bottom: 18px;
-  }
-
-  .progress-wrap { margin-bottom: 6px; }
-
-  .progress-track {
-    height: 6px;
-    background: var(--bar-track);
-    border-radius: 999px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: var(--green);
-    border-radius: 999px;
-    width: 0%;
-    transition: width 0.4s ease;
-  }
-
-  .progress-labels {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 8px;
-  }
-
-  .progress-labels .pct {
-    font-weight: 600;
-    color: var(--ink);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .earnings {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 20px;
-    padding-top: 4px;
-  }
-
-  .earn-label {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
-
-  .earn-value {
-    font-size: 26px;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-  }
-
+  html, body { min-height: 100%; background: var(--bg); color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  body { padding: 20px 16px 48px; display: flex; justify-content: center; }
+  .wrap { width: 100%; max-width: 440px; }
+  .header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; padding: 0 2px; }
+  .brand-en { font-size: 10px; letter-spacing: 0.18em; color: var(--muted); font-weight: 500; text-transform: uppercase; line-height: 1.2; }
+  .brand-zh { font-size: 26px; font-weight: 700; letter-spacing: 0.04em; color: var(--ink); line-height: 1.25; margin-top: 2px; }
+  .badge { display: inline-flex; align-items: center; gap: 4px; background: var(--card); border: 1px solid #e0e0e0; border-radius: 999px; padding: 6px 12px; font-size: 12px; color: var(--ink); font-weight: 500; white-space: nowrap; box-shadow: var(--shadow); margin-top: 4px; }
+  .card { background: var(--card); border-radius: var(--radius); padding: 20px 20px 18px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .meta-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .live-clock { font-variant-numeric: tabular-nums; color: var(--faint); font-size: 12px; }
+  .countdown { font-size: 48px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.1; color: var(--ink); }
+  .countdown-sub { font-size: 13px; color: var(--muted); margin-top: 4px; margin-bottom: 18px; }
+  .progress-track { height: 6px; background: var(--bar-track); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--green); border-radius: 999px; width: 0%; transition: width 0.4s ease; }
+  .progress-labels { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--muted); margin-top: 8px; }
+  .progress-labels .pct { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .earnings { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; padding-top: 4px; }
+  .earn-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .earn-value { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; line-height: 1.15; }
   .earn-value.green { color: var(--green); }
-
-  .earn-note {
-    font-size: 11px;
-    color: var(--faint);
-    margin-top: 4px;
-  }
-
-  /* Session card */
-  .session-timer {
-    font-size: 48px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    font-variant-numeric: tabular-nums;
-    line-height: 1.1;
-    margin-bottom: 8px;
-  }
-
-  .task-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 18px;
-    gap: 12px;
-  }
-
-  .task-desc {
-    font-size: 14px;
-    color: var(--ink);
-  }
-
-  .task-earn {
-    font-size: 14px;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-    color: var(--ink);
-    white-space: nowrap;
-  }
-
-  .btn {
-    display: block;
-    width: 100%;
-    border: none;
-    border-radius: 12px;
-    padding: 14px 16px;
-    font-size: 15px;
-    font-weight: 600;
-    font-family: inherit;
-    cursor: pointer;
-    transition: background 0.15s, transform 0.05s;
-  }
-
+  .earn-note { font-size: 11px; color: var(--faint); margin-top: 4px; }
+  .session-timer { font-size: 48px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.1; margin-bottom: 8px; }
+  .task-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; gap: 12px; }
+  .task-desc { font-size: 14px; color: var(--ink); }
+  .task-earn { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .btn { display: block; width: 100%; border: none; border-radius: 12px; padding: 14px 16px; font-size: 15px; font-weight: 600; font-family: inherit; cursor: pointer; transition: background 0.15s, transform 0.05s; }
   .btn:active { transform: scale(0.99); }
-
-  .btn-primary {
-    background: var(--green);
-    color: #fff;
-    margin-bottom: 10px;
-  }
-
+  .btn-primary { background: var(--green); color: #fff; margin-bottom: 10px; }
   .btn-primary:hover { background: var(--green-deep); }
-
-  .btn-primary:disabled {
-    background: #9aada1;
-    cursor: not-allowed;
-  }
-
-  .btn-secondary {
-    background: #f0f0f0;
-    color: var(--ink);
-  }
-
+  .btn-primary:disabled { background: #9aada1; cursor: not-allowed; }
+  .btn-secondary { background: #f0f0f0; color: var(--ink); margin-bottom: 10px; }
   .btn-secondary:hover { background: #e6e6e6; }
-
-  .status-text {
-    text-align: center;
-    font-size: 12px;
-    color: var(--muted);
-    margin: 12px 0 14px;
-  }
-
-  .fields {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .field label {
-    display: block;
-    font-size: 11px;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
-
-  .field input,
-  .field select {
-    width: 100%;
-    border: 1px solid #e2e2e2;
-    border-radius: 10px;
-    padding: 10px 12px;
-    font-size: 14px;
-    font-family: inherit;
-    background: #fafafa;
-    color: var(--ink);
-    appearance: none;
-    -webkit-appearance: none;
-  }
-
-  .field input[type="time"] {
-    min-height: 42px;
-  }
-
-  .field select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238a8a8a' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    padding-right: 32px;
-  }
-
-  .field input:focus,
-  .field select:focus {
-    outline: none;
-    border-color: var(--green);
-    background: #fff;
-  }
-
-  .place-row {
-    margin-top: 10px;
-  }
-
+  .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .btn-row .btn { margin-bottom: 0; padding: 12px 10px; font-size: 13px; }
+  .btn-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .btn-row-3 .btn { margin-bottom: 0; padding: 11px 6px; font-size: 12px; }
+  .btn-ghost { background: transparent; border: 1px solid #e0e0e0; color: var(--ink); margin-bottom: 0; }
+  .btn-ghost:hover { background: #f7f7f7; }
+  .status-text { text-align: center; font-size: 12px; color: var(--muted); margin: 12px 0 14px; }
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .field input, .field select { width: 100%; border: 1px solid #e2e2e2; border-radius: 10px; padding: 10px 12px; font-size: 14px; font-family: inherit; background: #fafafa; color: var(--ink); appearance: none; -webkit-appearance: none; }
+  .field input[type="time"], .field input[type="date"] { min-height: 42px; }
+  .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238a8a8a' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--green); background: #fff; }
+  .place-row { margin-top: 10px; }
   .place-row .field { grid-column: 1 / -1; }
-
-  /* Empty state */
-  .empty-state {
-    text-align: center;
-    padding: 8px 0 4px;
-  }
-
-  .empty-state .session-timer {
-    color: var(--faint);
-  }
-
-  .empty-hint {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 16px;
-  }
-
-  /* Settings disclosure */
-  .settings {
-    margin-top: 4px;
-    margin-bottom: 14px;
-  }
-
-  .settings summary {
-    list-style: none;
-    cursor: pointer;
-    font-size: 12px;
-    color: var(--muted);
-    padding: 6px 4px;
-    user-select: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
+  .settings { margin-top: 4px; margin-bottom: 14px; }
+  .settings summary { list-style: none; cursor: pointer; font-size: 12px; color: var(--muted); padding: 6px 4px; user-select: none; display: flex; align-items: center; gap: 6px; }
   .settings summary::-webkit-details-marker { display: none; }
-
-  .settings summary::before {
-    content: "⚙";
-    font-size: 13px;
-  }
-
+  .settings summary::before { content: "⚙"; font-size: 13px; }
   .settings[open] summary { color: var(--ink); margin-bottom: 8px; }
-
-  .settings-body {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 16px;
-    box-shadow: var(--shadow);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
+  .settings-body { background: var(--card); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .settings-body .field.full { grid-column: 1 / -1; }
-
-  .settings-hint {
-    grid-column: 1 / -1;
-    font-size: 11px;
-    color: var(--faint);
-    margin-top: 2px;
-  }
-
-  /* History */
-  .history-card h3 {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--muted);
-    margin-bottom: 12px;
-  }
-
-  .history-empty {
-    font-size: 13px;
-    color: var(--faint);
-    text-align: center;
-    padding: 12px 0;
-  }
-
-  .history-item {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 4px 12px;
-    padding: 12px 0;
-    border-top: 1px solid #f0f0f0;
-  }
-
+  .settings-hint { grid-column: 1 / -1; font-size: 11px; color: var(--faint); margin-top: 2px; }
+  .section-title { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .history-empty, .gallery-empty { font-size: 13px; color: var(--faint); text-align: center; padding: 12px 0; }
+  .history-item { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 12px 0; border-top: 1px solid #f0f0f0; }
   .history-item:first-of-type { border-top: none; }
-
-  .hist-title {
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  .hist-meta {
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .hist-earn {
-    font-size: 14px;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-    text-align: right;
-  }
-
-  .hist-dur {
-    font-size: 12px;
-    color: var(--muted);
-    text-align: right;
-  }
-
-  .btn-clear {
-    margin-top: 8px;
-    background: transparent;
-    border: none;
-    color: var(--faint);
-    font-size: 12px;
-    font-family: inherit;
-    cursor: pointer;
-    width: 100%;
-    padding: 8px;
-  }
-
+  .hist-title { font-size: 14px; font-weight: 500; }
+  .hist-meta { font-size: 12px; color: var(--muted); }
+  .hist-earn { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+  .hist-dur { font-size: 12px; color: var(--muted); text-align: right; }
+  .btn-clear { margin-top: 8px; background: transparent; border: none; color: var(--faint); font-size: 12px; font-family: inherit; cursor: pointer; width: 100%; padding: 8px; }
   .btn-clear:hover { color: var(--muted); }
-
+  .summary-box { background: #f7f8f7; border-radius: 12px; padding: 14px; margin-bottom: 12px; font-size: 13px; line-height: 1.55; }
+  .summary-box .sum-row { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+  .summary-box .sum-row strong { font-variant-numeric: tabular-nums; }
+  .summary-box .cat-line { color: var(--muted); font-size: 12px; padding-left: 2px; }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 999px; font-size: 13px; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; z-index: 50; max-width: 90vw; text-align: center; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .gallery-item { background: #f7f7f7; border-radius: 12px; overflow: hidden; border: 1px solid #eee; }
+  .gallery-item img { display: block; width: 100%; aspect-ratio: 4/5; object-fit: cover; background: #eee; }
+  .gallery-meta { padding: 8px 10px 10px; }
+  .gallery-date { font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+  .gallery-btns { display: flex; gap: 6px; }
+  .gallery-btns button { flex: 1; border: none; border-radius: 8px; padding: 7px 0; font-size: 11px; font-family: inherit; font-weight: 600; cursor: pointer; }
+  .gallery-btns .dl { background: var(--green); color: #fff; }
+  .gallery-btns .rm { background: #ececec; color: var(--muted); }
+  .hidden-file { display: none; }
   @media (max-width: 380px) {
     .countdown, .session-timer { font-size: 40px; }
     .earn-value { font-size: 22px; }
+    .btn-row-3 { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -452,7 +112,6 @@
     <div class="badge">🐍 低調記錄</div>
   </header>
 
-  <!-- Workday overview -->
   <section class="card" id="overviewCard">
     <div class="meta-row">
       <span id="hkDateLabel">香港時間 · —</span>
@@ -460,18 +119,14 @@
     </div>
     <div class="countdown" id="countdown">--:--:--</div>
     <div class="countdown-sub" id="countdownSub">距離 — 放工</div>
-
     <div class="progress-wrap">
-      <div class="progress-track">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
       <div class="progress-labels">
         <span id="labelStart">07:10 上班</span>
         <span class="pct" id="progressPct">0.0%</span>
         <span id="labelEnd">15:40 放工</span>
       </div>
     </div>
-
     <div class="earnings">
       <div>
         <div class="earn-label">今日已折算人工</div>
@@ -485,7 +140,6 @@
     </div>
   </section>
 
-  <!-- Settings -->
   <details class="settings" id="settingsPanel">
     <summary>設定</summary>
     <div class="settings-body">
@@ -509,13 +163,11 @@
     </div>
   </details>
 
-  <!-- Session timer -->
   <section class="card" id="sessionCard">
     <div class="meta-row">
       <span>目前計時</span>
       <span id="sessionStartedAt">尚未開始</span>
     </div>
-
     <div id="sessionActive">
       <div class="session-timer" id="sessionElapsed">00:00:00</div>
       <div class="task-row">
@@ -526,7 +178,6 @@
       <button type="button" class="btn btn-secondary" id="btnStart">開始新計時</button>
       <div class="status-text" id="statusText">已開始計時</div>
     </div>
-
     <div class="fields">
       <div class="field">
         <label for="inputStartTime">開始時間</label>
@@ -550,199 +201,196 @@
     </div>
   </section>
 
-  <!-- History -->
   <section class="card history-card" id="historyCard">
-    <h3>今日紀錄</h3>
+    <div class="section-title">
+      <span>今日紀錄</span>
+      <span style="font-weight:500;font-size:11px;color:var(--faint)" id="historyCount"></span>
+    </div>
+    <div class="summary-box" id="dailySummary">
+      <div class="sum-row"><span>今日計時總長</span><strong id="sumDuration">00:00:00</strong></div>
+      <div class="sum-row"><span>今日計時折算</span><strong id="sumEarn">HK$0.00</strong></div>
+      <div class="sum-row"><span>放工進度／折算人工</span><strong id="sumProgress">0% · HK$0.00</strong></div>
+      <div id="sumCats"></div>
+    </div>
+    <div class="fields" style="margin-bottom:10px">
+      <div class="field" style="grid-column:1/-1">
+        <label for="reportDate">報表日期（圖片／CSV／摘要）</label>
+        <input type="date" id="reportDate" />
+      </div>
+    </div>
     <div id="historyList"><div class="history-empty">未有紀錄</div></div>
-    <button type="button" class="btn-clear" id="btnClearHistory" hidden>清除今日紀錄</button>
+    <button type="button" class="btn-clear" id="btnClearHistory" hidden>清除此日紀錄</button>
+    <div class="summary-actions">
+      <div class="btn-row-3">
+        <button type="button" class="btn btn-ghost" id="btnExportCsv">匯出 CSV</button>
+        <button type="button" class="btn btn-ghost" id="btnExportJson">匯出 JSON</button>
+        <button type="button" class="btn btn-ghost" id="btnExportXlsx">匯出 Excel</button>
+      </div>
+      <div class="btn-row" style="margin-top:8px">
+        <button type="button" class="btn btn-secondary" id="btnImport" style="margin:0">導入記錄</button>
+        <button type="button" class="btn btn-primary" id="btnSaveImage" style="margin:0">儲存今日圖片</button>
+      </div>
+      <input type="file" id="importFile" class="hidden-file" accept=".xlsx,.json,.csv,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv" />
+      <p class="settings-hint" style="margin-top:10px;display:block">
+        Excel 為累積全歷史（明細／每日摘要／累積三頁）。CSV／圖片依上方日期。導入支援 Excel／JSON／CSV，按日期+開始+結束去重合併。
+      </p>
+    </div>
+  </section>
+
+  <section class="card" id="galleryCard">
+    <div class="section-title">
+      <span>每日圖片紀錄</span>
+      <button type="button" class="btn-clear" id="btnRecordToday" style="width:auto;margin:0;padding:0;color:var(--green)">記錄今日</button>
+    </div>
+    <div id="galleryList" class="gallery"><div class="gallery-empty" style="grid-column:1/-1">未有圖片紀錄</div></div>
   </section>
 </div>
-
+<div class="toast" id="toast"></div>
 <script>
 (function () {
   "use strict";
-
   const TZ = "Asia/Hong_Kong";
   const STORAGE_KEY = "quiet-workday-timer-v1";
-
+  const IMAGES_KEY = "quiet-workday-images-v1";
+  const MAX_IMAGE_DAYS = 30;
   const DEFAULTS = {
-    workStart: "07:10",
-    workEnd: "15:40",
-    monthlySalary: 41320,
-    monthlyHours: 170,
-    place: "小音樂室",
-    category: "🐍 休息",
+    workStart: "07:10", workEnd: "15:40",
+    monthlySalary: 41320, monthlyHours: 170,
+    place: "小音樂室", category: "🐍 休息",
   };
-
-  /** @type {{
-   *   workStart: string, workEnd: string,
-   *   monthlySalary: number, monthlyHours: number,
-   *   place: string, category: string,
-   *   session: null | { startedAt: number, place: string, category: string },
-   *   history: Array<{id:string, date:string, startMs:number, endMs:number, place:string, category:string, durationSec:number, earn:number}>
-   * }} */
   let state = loadState();
-
-  // DOM
+  let imageStore = loadImages();
   const $ = (id) => document.getElementById(id);
   const els = {
-    hkDateLabel: $("hkDateLabel"),
-    liveClock: $("liveClock"),
-    countdown: $("countdown"),
-    countdownSub: $("countdownSub"),
-    progressFill: $("progressFill"),
-    progressPct: $("progressPct"),
-    labelStart: $("labelStart"),
-    labelEnd: $("labelEnd"),
-    todayEarn: $("todayEarn"),
-    hourlyRate: $("hourlyRate"),
-    salaryNote: $("salaryNote"),
-    sessionStartedAt: $("sessionStartedAt"),
-    sessionElapsed: $("sessionElapsed"),
-    taskDesc: $("taskDesc"),
-    sessionEarn: $("sessionEarn"),
-    statusText: $("statusText"),
-    btnStop: $("btnStop"),
-    btnStart: $("btnStart"),
-    inputStartTime: $("inputStartTime"),
-    inputCategory: $("inputCategory"),
+    hkDateLabel: $("hkDateLabel"), liveClock: $("liveClock"),
+    countdown: $("countdown"), countdownSub: $("countdownSub"),
+    progressFill: $("progressFill"), progressPct: $("progressPct"),
+    labelStart: $("labelStart"), labelEnd: $("labelEnd"),
+    todayEarn: $("todayEarn"), hourlyRate: $("hourlyRate"), salaryNote: $("salaryNote"),
+    sessionStartedAt: $("sessionStartedAt"), sessionElapsed: $("sessionElapsed"),
+    taskDesc: $("taskDesc"), sessionEarn: $("sessionEarn"), statusText: $("statusText"),
+    btnStop: $("btnStop"), btnStart: $("btnStart"),
+    inputStartTime: $("inputStartTime"), inputCategory: $("inputCategory"),
     inputPlace: $("inputPlace"),
-    cfgStart: $("cfgStart"),
-    cfgEnd: $("cfgEnd"),
-    cfgSalary: $("cfgSalary"),
-    cfgHours: $("cfgHours"),
-    historyList: $("historyList"),
-    btnClearHistory: $("btnClearHistory"),
+    cfgStart: $("cfgStart"), cfgEnd: $("cfgEnd"),
+    cfgSalary: $("cfgSalary"), cfgHours: $("cfgHours"),
+    historyList: $("historyList"), btnClearHistory: $("btnClearHistory"),
+    historyCount: $("historyCount"), reportDate: $("reportDate"),
+    sumDuration: $("sumDuration"), sumEarn: $("sumEarn"),
+    sumProgress: $("sumProgress"), sumCats: $("sumCats"),
+    btnExportCsv: $("btnExportCsv"), btnExportJson: $("btnExportJson"),
+    btnExportXlsx: $("btnExportXlsx"), btnImport: $("btnImport"),
+    importFile: $("importFile"), btnSaveImage: $("btnSaveImage"),
+    galleryList: $("galleryList"), btnRecordToday: $("btnRecordToday"),
+    toast: $("toast"),
   };
 
-  // ---------- Time helpers (HK) ----------
   function partsInHK(date = new Date()) {
     const fmt = new Intl.DateTimeFormat("en-CA", {
-      timeZone: TZ,
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
+      timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false,
     });
     const map = {};
-    for (const p of fmt.formatToParts(date)) {
-      if (p.type !== "literal") map[p.type] = p.value;
-    }
-    // en-CA hour12:false can yield "24" for midnight in some engines
-    let hour = map.hour;
-    if (hour === "24") hour = "00";
+    for (const p of fmt.formatToParts(date)) if (p.type !== "literal") map[p.type] = p.value;
+    let hour = map.hour; if (hour === "24") hour = "00";
     return {
-      year: map.year,
-      month: map.month,
-      day: map.day,
-      hour,
-      minute: map.minute,
-      second: map.second,
+      year: map.year, month: map.month, day: map.day, hour,
+      minute: map.minute, second: map.second,
       dateStr: `${map.year}-${map.month}-${map.day}`,
       timeStr: `${hour}:${map.minute}:${map.second}`,
       hm: `${hour}:${map.minute}`,
     };
   }
-
-  /** Build a Date representing YYYY-MM-DD HH:MM:SS in Asia/Hong_Kong */
   function hkWallToUtcMs(dateStr, hmss) {
-    // HK is UTC+8 with no DST
     const [y, mo, d] = dateStr.split("-").map(Number);
     const parts = hmss.split(":").map(Number);
-    const h = parts[0] || 0;
-    const mi = parts[1] || 0;
-    const s = parts[2] || 0;
+    const h = parts[0] || 0, mi = parts[1] || 0, s = parts[2] || 0;
     return Date.UTC(y, mo - 1, d, h - 8, mi, s);
   }
-
-  function parseHm(hm) {
-    const [h, m] = hm.split(":").map(Number);
-    return { h: h || 0, m: m || 0 };
-  }
-
-  function pad2(n) {
-    return String(n).padStart(2, "0");
-  }
-
+  function pad2(n) { return String(n).padStart(2, "0"); }
   function formatHMS(totalSec) {
     const sec = Math.max(0, Math.floor(totalSec));
-    const h = Math.floor(sec / 3600);
-    const m = Math.floor((sec % 3600) / 60);
-    const s = sec % 60;
+    const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
     return `${pad2(h)}:${pad2(m)}:${pad2(s)}`;
   }
-
+  function parseHMS(str) {
+    if (!str) return 0;
+    const p = String(str).trim().split(":").map(Number);
+    if (p.length === 3) return (p[0] || 0) * 3600 + (p[1] || 0) * 60 + (p[2] || 0);
+    if (p.length === 2) return (p[0] || 0) * 3600 + (p[1] || 0) * 60;
+    return Number(str) || 0;
+  }
   function formatMoney(n) {
     const v = Math.max(0, Number(n) || 0);
-    return "HK$" + v.toLocaleString("en-HK", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
+    return "HK$" + v.toLocaleString("en-HK", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
-
   function formatSalaryNote(n) {
-    const v = Math.round(Number(n) || 0);
-    return "月薪扣MPF後 HK$" + v.toLocaleString("en-HK");
+    return "月薪扣MPF後 HK$" + Math.round(Number(n) || 0).toLocaleString("en-HK");
   }
-
   function hourly() {
-    const hours = Number(state.monthlyHours) || 170;
-    return (Number(state.monthlySalary) || 0) / hours;
+    return (Number(state.monthlySalary) || 0) / (Number(state.monthlyHours) || 170);
   }
-
   function dayBoundsMs(dateStr) {
     const start = hkWallToUtcMs(dateStr, state.workStart + ":00");
     const end = hkWallToUtcMs(dateStr, state.workEnd + ":00");
-    return { start, end, durationMs: end - start };
+    return { start, end, durationMs: Math.max(0, end - start) };
   }
-
-  // ---------- Persistence ----------
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+  function toast(msg) {
+    els.toast.textContent = msg;
+    els.toast.classList.add("show");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => els.toast.classList.remove("show"), 2600);
+  }
+  function baseState() {
+    return {
+      workStart: DEFAULTS.workStart, workEnd: DEFAULTS.workEnd,
+      monthlySalary: DEFAULTS.monthlySalary, monthlyHours: DEFAULTS.monthlyHours,
+      place: DEFAULTS.place, category: DEFAULTS.category,
+      session: null, history: [], lastImageDate: null,
+    };
+  }
   function loadState() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return baseState();
       const parsed = JSON.parse(raw);
-      return {
-        ...baseState(),
-        ...parsed,
-        history: Array.isArray(parsed.history) ? parsed.history : [],
-        session: parsed.session || null,
-      };
-    } catch {
-      return baseState();
+      return { ...baseState(), ...parsed, history: Array.isArray(parsed.history) ? parsed.history : [], session: parsed.session || null };
+    } catch { return baseState(); }
+  }
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      workStart: state.workStart, workEnd: state.workEnd,
+      monthlySalary: state.monthlySalary, monthlyHours: state.monthlyHours,
+      place: state.place, category: state.category,
+      session: state.session, history: state.history,
+      lastImageDate: state.lastImageDate || null,
+    }));
+  }
+  function loadImages() {
+    try {
+      const raw = localStorage.getItem(IMAGES_KEY);
+      if (!raw) return {};
+      const obj = JSON.parse(raw);
+      return obj && typeof obj === "object" ? obj : {};
+    } catch { return {}; }
+  }
+  function saveImages() {
+    const dates = Object.keys(imageStore).sort();
+    while (dates.length > MAX_IMAGE_DAYS) delete imageStore[dates.shift()];
+    try { localStorage.setItem(IMAGES_KEY, JSON.stringify(imageStore)); }
+    catch (e) {
+      const keys = Object.keys(imageStore).sort();
+      while (keys.length > 1) {
+        delete imageStore[keys.shift()];
+        try { localStorage.setItem(IMAGES_KEY, JSON.stringify(imageStore)); break; } catch (_) {}
+      }
+      toast("圖片儲存空間不足，已清理舊紀錄");
     }
   }
 
-  function baseState() {
-    return {
-      workStart: DEFAULTS.workStart,
-      workEnd: DEFAULTS.workEnd,
-      monthlySalary: DEFAULTS.monthlySalary,
-      monthlyHours: DEFAULTS.monthlyHours,
-      place: DEFAULTS.place,
-      category: DEFAULTS.category,
-      session: null,
-      history: [],
-    };
-  }
-
-  function saveState() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      workStart: state.workStart,
-      workEnd: state.workEnd,
-      monthlySalary: state.monthlySalary,
-      monthlyHours: state.monthlyHours,
-      place: state.place,
-      category: state.category,
-      session: state.session,
-      history: state.history,
-    }));
-  }
-
-  // ---------- UI sync from settings ----------
   function applySettingsToForm() {
     els.cfgStart.value = state.workStart;
     els.cfgEnd.value = state.workEnd;
@@ -754,7 +402,6 @@
       els.inputCategory.value = DEFAULTS.category;
     }
   }
-
   function readSettingsFromForm() {
     state.workStart = els.cfgStart.value || DEFAULTS.workStart;
     state.workEnd = els.cfgEnd.value || DEFAULTS.workEnd;
@@ -762,23 +409,50 @@
     state.monthlyHours = Math.max(1, Number(els.cfgHours.value) || 170);
     state.place = (els.inputPlace.value || "").trim() || DEFAULTS.place;
     state.category = els.inputCategory.value || DEFAULTS.category;
-    saveState();
-    tick();
+    saveState(); tick(); renderHistory();
   }
-
-  // ---------- Tick ----------
+  function selectedReportDate() { return els.reportDate.value || partsInHK().dateStr; }
+  function historyForDate(dateStr) {
+    return state.history.filter((h) => h.date === dateStr).sort((a, b) => a.startMs - b.startMs);
+  }
+  function allHistorySorted() {
+    return [...state.history].sort((a, b) => a.startMs - b.startMs || a.endMs - b.endMs);
+  }
+  function sessionKey(h) { return `${h.date}|${h.startMs}|${h.endMs}`; }
+  function dayWorkStats(dateStr, asOfMs) {
+    const { start, end, durationMs } = dayBoundsMs(dateStr);
+    let ref = asOfMs != null ? asOfMs : Date.now();
+    const today = partsInHK().dateStr;
+    if (dateStr < today) ref = end;
+    else if (dateStr > today) ref = start;
+    let elapsed = ref - start;
+    if (elapsed < 0) elapsed = 0;
+    if (elapsed > durationMs) elapsed = durationMs;
+    const pct = durationMs > 0 ? (elapsed / durationMs) * 100 : 0;
+    const rate = hourly();
+    return { start, end, durationMs, elapsed, pct, converted: rate * (elapsed / 3600), rate };
+  }
+  function summarizeSessions(items) {
+    let totalSec = 0, totalEarn = 0;
+    const byCat = {};
+    for (const h of items) {
+      totalSec += h.durationSec || 0;
+      totalEarn += h.earn || 0;
+      const c = h.category || "未分類";
+      if (!byCat[c]) byCat[c] = { sec: 0, earn: 0, n: 0 };
+      byCat[c].sec += h.durationSec || 0;
+      byCat[c].earn += h.earn || 0;
+      byCat[c].n += 1;
+    }
+    return { totalSec, totalEarn, byCat };
+  }
   function tick() {
     const now = new Date();
     const p = partsInHK(now);
     const nowMs = now.getTime();
-
     els.hkDateLabel.textContent = `香港時間 · ${p.dateStr}`;
     els.liveClock.textContent = p.timeStr;
-
     const { start, end, durationMs } = dayBoundsMs(p.dateStr);
-    const dayHours = durationMs / 3600000;
-
-    // Countdown
     const remainMs = end - nowMs;
     if (remainMs >= 0) {
       els.countdown.textContent = formatHMS(remainMs / 1000);
@@ -787,8 +461,6 @@
       els.countdown.textContent = formatHMS(Math.abs(remainMs) / 1000);
       els.countdownSub.textContent = "已超過放工時間";
     }
-
-    // Progress: elapsed since start, capped [0, 100]
     let elapsedWorkMs = nowMs - start;
     if (elapsedWorkMs < 0) elapsedWorkMs = 0;
     if (elapsedWorkMs > durationMs) elapsedWorkMs = durationMs;
@@ -797,27 +469,23 @@
     els.progressPct.textContent = pct.toFixed(1) + "%";
     els.labelStart.textContent = `${state.workStart} 上班`;
     els.labelEnd.textContent = `${state.workEnd} 放工`;
-
-    // Earnings
     const rate = hourly();
-    const workedHours = elapsedWorkMs / 3600000;
-    els.todayEarn.textContent = formatMoney(rate * workedHours);
+    els.todayEarn.textContent = formatMoney(rate * (elapsedWorkMs / 3600000));
     els.hourlyRate.textContent = formatMoney(rate);
     els.salaryNote.textContent = formatSalaryNote(state.monthlySalary);
-
-    // Session
-    updateSessionUI(nowMs, p, rate);
-
-    // Keep time picker default near "now" when idle
-    if (!state.session && document.activeElement !== els.inputStartTime) {
-      // don't fight user while editing
+    updateSessionUI(nowMs, rate);
+    updateDailySummary();
+    if (state.lastImageDate && state.lastImageDate !== p.dateStr) {
+      maybeAutoSnapshot(state.lastImageDate);
+    }
+    if (state.lastImageDate !== p.dateStr) {
+      state.lastImageDate = p.dateStr;
+      saveState();
     }
   }
-
-  function updateSessionUI(nowMs, p, rate) {
+  function updateSessionUI(nowMs, rate) {
     const place = state.place || DEFAULTS.place;
     const cat = state.category || DEFAULTS.category;
-
     if (!state.session) {
       els.sessionStartedAt.textContent = "尚未開始";
       els.sessionElapsed.textContent = "00:00:00";
@@ -828,195 +496,815 @@
       els.btnStop.disabled = true;
       return;
     }
-
     els.sessionElapsed.style.color = "";
     const started = state.session.startedAt;
     const elapsedSec = Math.max(0, (nowMs - started) / 1000);
     const sp = partsInHK(new Date(started));
     els.sessionStartedAt.textContent = `${sp.dateStr} ${sp.hm} 開始`;
     els.sessionElapsed.textContent = formatHMS(elapsedSec);
-
     const sPlace = state.session.place || place;
     const sCat = state.session.category || cat;
     els.taskDesc.textContent = `${sPlace} · ${sCat}`;
     els.sessionEarn.textContent = formatMoney(rate * (elapsedSec / 3600));
     els.statusText.textContent = "已開始計時";
     els.btnStop.disabled = false;
-
-    // Sync inputs to active session (unless focused)
-    if (document.activeElement !== els.inputPlace) {
-      els.inputPlace.value = sPlace;
-    }
-    if (document.activeElement !== els.inputCategory) {
-      els.inputCategory.value = sCat;
-    }
-    if (document.activeElement !== els.inputStartTime) {
-      els.inputStartTime.value = sp.hm;
-    }
+    if (document.activeElement !== els.inputPlace) els.inputPlace.value = sPlace;
+    if (document.activeElement !== els.inputCategory) els.inputCategory.value = sCat;
+    if (document.activeElement !== els.inputStartTime) els.inputStartTime.value = sp.hm;
   }
-
-  // ---------- Session actions ----------
+  function updateDailySummary() {
+    const dateStr = selectedReportDate();
+    const items = historyForDate(dateStr);
+    const sum = summarizeSessions(items);
+    const ws = dayWorkStats(dateStr);
+    els.sumDuration.textContent = formatHMS(sum.totalSec);
+    els.sumEarn.textContent = formatMoney(sum.totalEarn);
+    els.sumProgress.textContent = `${ws.pct.toFixed(1)}% · ${formatMoney(ws.converted)}`;
+    const catLines = Object.keys(sum.byCat).sort().map((c) => {
+      const v = sum.byCat[c];
+      return `<div class="cat-line">${escapeHtml(c)} · ${formatHMS(v.sec)} · ${formatMoney(v.earn)}（${v.n}）</div>`;
+    });
+    els.sumCats.innerHTML = catLines.length ? catLines.join("") : '<div class="cat-line">未有分類明細</div>';
+  }
   function startSession() {
     const p = partsInHK();
-    let startMs;
-
     const picked = els.inputStartTime.value;
-    if (picked) {
-      startMs = hkWallToUtcMs(p.dateStr, picked + ":00");
-      // If picked time is in the future relative to now, still allow (user override)
-      // If more than 18h in the past on same calendar day weirdness, keep as-is
-    } else {
-      startMs = Date.now();
-    }
-
+    const startMs = picked ? hkWallToUtcMs(p.dateStr, picked + ":00") : Date.now();
     const place = (els.inputPlace.value || "").trim() || DEFAULTS.place;
     const category = els.inputCategory.value || DEFAULTS.category;
-
-    state.place = place;
-    state.category = category;
-    state.session = {
-      startedAt: startMs,
-      place,
-      category,
-    };
-    saveState();
-    tick();
+    state.place = place; state.category = category;
+    state.session = { startedAt: startMs, place, category };
+    saveState(); tick();
   }
-
   function stopAndSave() {
     if (!state.session) return;
     const nowMs = Date.now();
     const startMs = state.session.startedAt;
-    let endMs = nowMs;
-    if (endMs < startMs) endMs = startMs;
-
+    const endMs = Math.max(nowMs, startMs);
     const durationSec = Math.max(0, Math.floor((endMs - startMs) / 1000));
     const earn = hourly() * (durationSec / 3600);
     const sp = partsInHK(new Date(startMs));
-
     state.history.unshift({
       id: String(Date.now()) + "-" + Math.random().toString(36).slice(2, 7),
-      date: sp.dateStr,
-      startMs,
-      endMs,
-      place: state.session.place,
-      category: state.session.category,
-      durationSec,
-      earn,
+      date: sp.dateStr, startMs, endMs,
+      place: state.session.place, category: state.session.category,
+      durationSec, earn,
     });
-
-    // Keep last 100
-    if (state.history.length > 100) state.history = state.history.slice(0, 100);
-
+    if (state.history.length > 2000) state.history = state.history.slice(0, 2000);
     state.session = null;
     saveState();
     renderHistory();
-    // Reset time picker to now for next start
-    const np = partsInHK();
-    els.inputStartTime.value = np.hm;
+    els.inputStartTime.value = partsInHK().hm;
     tick();
+    maybeAutoSnapshot(sp.dateStr, true);
   }
-
   function renderHistory() {
-    const today = partsInHK().dateStr;
-    const items = state.history.filter((h) => h.date === today);
-
+    const dateStr = selectedReportDate();
+    const items = historyForDate(dateStr).slice().reverse();
+    els.historyCount.textContent = items.length ? `${items.length} 筆` : "";
     if (!items.length) {
       els.historyList.innerHTML = '<div class="history-empty">未有紀錄</div>';
       els.btnClearHistory.hidden = true;
-      return;
+    } else {
+      els.btnClearHistory.hidden = false;
+      els.historyList.innerHTML = items.map((h) => {
+        const a = partsInHK(new Date(h.startMs));
+        const b = partsInHK(new Date(h.endMs));
+        return `<div class="history-item"><div>
+            <div class="hist-title">${escapeHtml(h.place)} · ${escapeHtml(h.category)}</div>
+            <div class="hist-meta">${a.hm} – ${b.hm}</div></div><div>
+            <div class="hist-earn">${formatMoney(h.earn)}</div>
+            <div class="hist-dur">${formatHMS(h.durationSec)}</div></div></div>`;
+      }).join("");
     }
+    updateDailySummary();
+  }
+  function clearDayHistory() {
+    const dateStr = selectedReportDate();
+    state.history = state.history.filter((h) => h.date !== dateStr);
+    saveState(); renderHistory(); toast("已清除 " + dateStr + " 紀錄");
+  }
 
-    els.btnClearHistory.hidden = false;
-    els.historyList.innerHTML = items.map((h) => {
+  function downloadBlob(filename, blob) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  }
+  function downloadText(filename, text, mime) {
+    downloadBlob(filename, new Blob([text], { type: mime || "text/plain;charset=utf-8" }));
+  }
+  function csvEscape(v) {
+    const s = String(v ?? "");
+    if (/[",\n\r]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }
+  function exportCsv() {
+    const dateStr = selectedReportDate();
+    const items = historyForDate(dateStr);
+    const header = ["日期", "開始", "結束", "地點", "分類", "時長", "折算人工(HK$)"];
+    const rows = items.map((h) => {
       const a = partsInHK(new Date(h.startMs));
       const b = partsInHK(new Date(h.endMs));
-      return `
-        <div class="history-item">
-          <div>
-            <div class="hist-title">${escapeHtml(h.place)} · ${escapeHtml(h.category)}</div>
-            <div class="hist-meta">${a.hm} – ${b.hm}</div>
-          </div>
-          <div>
-            <div class="hist-earn">${formatMoney(h.earn)}</div>
-            <div class="hist-dur">${formatHMS(h.durationSec)}</div>
-          </div>
-        </div>`;
+      return [h.date, a.hm, b.hm, h.place, h.category, formatHMS(h.durationSec), (h.earn || 0).toFixed(2)];
+    });
+    const bom = "\uFEFF";
+    const body = [header, ...rows].map((r) => r.map(csvEscape).join(",")).join("\n");
+    downloadText(`quiet-workday-${dateStr}.csv`, bom + body, "text/csv;charset=utf-8");
+    toast("已匯出 CSV（" + items.length + " 筆）");
+  }
+  function serializeSession(h) {
+    const a = partsInHK(new Date(h.startMs));
+    const b = partsInHK(new Date(h.endMs));
+    return {
+      id: h.id, date: h.date, start: a.hm, end: b.hm,
+      startMs: h.startMs, endMs: h.endMs, place: h.place, category: h.category,
+      duration: formatHMS(h.durationSec), durationSec: h.durationSec,
+      earn: +((h.earn || 0).toFixed(2)),
+    };
+  }
+  function exportJson() {
+    const dateStr = selectedReportDate();
+    const items = historyForDate(dateStr);
+    const sum = summarizeSessions(items);
+    const ws = dayWorkStats(dateStr);
+    const payload = {
+      exportedAt: new Date().toISOString(), timezone: TZ, reportDate: dateStr,
+      settings: {
+        workStart: state.workStart, workEnd: state.workEnd,
+        monthlySalary: state.monthlySalary, monthlyHours: state.monthlyHours, hourly: hourly(),
+      },
+      workday: { progressPct: +ws.pct.toFixed(2), convertedSalary: +ws.converted.toFixed(2) },
+      summary: { totalDuration: formatHMS(sum.totalSec), totalEarn: +sum.totalEarn.toFixed(2), byCategory: sum.byCat },
+      allSessions: allHistorySorted().map(serializeSession),
+      daySessions: items.map(serializeSession),
+    };
+    downloadText(`quiet-workday-${dateStr}.json`, JSON.stringify(payload, null, 2), "application/json");
+    toast("已匯出 JSON");
+  }
+
+  function u16(n) { const b = new Uint8Array(2); new DataView(b.buffer).setUint16(0, n, true); return b; }
+  function u32(n) { const b = new Uint8Array(4); new DataView(b.buffer).setUint32(0, n, true); return b; }
+  function concatBytes(parts) {
+    let len = 0; for (const p of parts) len += p.length;
+    const out = new Uint8Array(len); let o = 0;
+    for (const p of parts) { out.set(p, o); o += p.length; }
+    return out;
+  }
+  function crc32(buf) {
+    let c = ~0;
+    for (let i = 0; i < buf.length; i++) {
+      c ^= buf[i];
+      for (let k = 0; k < 8; k++) c = (c >>> 1) ^ (0xedb88320 & -(c & 1));
+    }
+    return (~c) >>> 0;
+  }
+  async function deflateRaw(bytes) {
+    if (typeof CompressionStream === "undefined") return null;
+    const stream = new Blob([bytes]).stream().pipeThrough(new CompressionStream("deflate-raw"));
+    return new Uint8Array(await new Response(stream).arrayBuffer());
+  }
+  async function inflateRaw(bytes) {
+    if (typeof DecompressionStream === "undefined") throw new Error("瀏覽器不支援解壓");
+    const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+    return new Uint8Array(await new Response(stream).arrayBuffer());
+  }
+  async function buildZip(files) {
+    const enc = new TextEncoder();
+    const locals = []; const centrals = []; let offset = 0;
+    for (const f of files) {
+      const nameBytes = enc.encode(f.name);
+      const data = typeof f.data === "string" ? enc.encode(f.data) : f.data;
+      let compressed = await deflateRaw(data);
+      let method = 8;
+      if (!compressed || compressed.length >= data.length) { compressed = data; method = 0; }
+      const crc = crc32(data);
+      const local = concatBytes([
+        u32(0x04034b50), u16(20), u16(0), u16(method), u16(0), u16(0),
+        u32(crc), u32(compressed.length), u32(data.length),
+        u16(nameBytes.length), u16(0), nameBytes, compressed,
+      ]);
+      const central = concatBytes([
+        u32(0x02014b50), u16(20), u16(20), u16(0), u16(method), u16(0), u16(0),
+        u32(crc), u32(compressed.length), u32(data.length),
+        u16(nameBytes.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(offset),
+        nameBytes,
+      ]);
+      locals.push(local); centrals.push(central); offset += local.length;
+    }
+    const centralDir = concatBytes(centrals);
+    const end = concatBytes([
+      u32(0x06054b50), u16(0), u16(0), u16(files.length), u16(files.length),
+      u32(centralDir.length), u32(offset), u16(0),
+    ]);
+    return concatBytes([...locals, centralDir, end]);
+  }
+  function parseZip(buf) {
+    const view = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
+    let eocd = -1;
+    for (let i = buf.length - 22; i >= 0; i--) {
+      if (view.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
+    }
+    if (eocd < 0) throw new Error("無效的 ZIP／Excel 檔");
+    const entries = view.getUint16(eocd + 10, true);
+    let cdOff = view.getUint32(eocd + 16, true);
+    const files = {}; const dec = new TextDecoder();
+    for (let n = 0; n < entries; n++) {
+      if (view.getUint32(cdOff, true) !== 0x02014b50) throw new Error("ZIP 目錄損毀");
+      const method = view.getUint16(cdOff + 10, true);
+      const compSize = view.getUint32(cdOff + 20, true);
+      const nameLen = view.getUint16(cdOff + 28, true);
+      const extraLen = view.getUint16(cdOff + 30, true);
+      const commentLen = view.getUint16(cdOff + 32, true);
+      const localOff = view.getUint32(cdOff + 42, true);
+      const name = dec.decode(buf.subarray(cdOff + 46, cdOff + 46 + nameLen));
+      const locNameLen = view.getUint16(localOff + 26, true);
+      const locExtraLen = view.getUint16(localOff + 28, true);
+      const dataStart = localOff + 30 + locNameLen + locExtraLen;
+      const comp = buf.subarray(dataStart, dataStart + compSize);
+      files[name] = { method, comp };
+      cdOff += 46 + nameLen + extraLen + commentLen;
+    }
+    return files;
+  }
+  async function zipReadText(files, path) {
+    const ent = files[path];
+    if (!ent) return null;
+    let data = ent.comp;
+    if (ent.method === 8) data = await inflateRaw(ent.comp);
+    else if (ent.method !== 0) throw new Error("不支援的壓縮方式");
+    return new TextDecoder().decode(data);
+  }
+  function xmlEscape(s) {
+    return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+  function colName(i) {
+    let s = ""; i += 1;
+    while (i > 0) { const m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); }
+    return s;
+  }
+  function sheetXml(rows) {
+    let out = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+    out += '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>';
+    rows.forEach((row, ri) => {
+      out += `<row r="${ri + 1}">`;
+      row.forEach((cell, ci) => {
+        const ref = colName(ci) + (ri + 1);
+        if (cell == null || cell.v === "" || cell.v == null) out += `<c r="${ref}"/>`;
+        else if (cell.t === "n" || typeof cell.v === "number") out += `<c r="${ref}"><v>${cell.v}</v></c>`;
+        else out += `<c r="${ref}" t="inlineStr"><is><t>${xmlEscape(cell.v)}</t></is></c>`;
+      });
+      out += "</row>";
+    });
+    out += "</sheetData></worksheet>";
+    return out;
+  }
+  function cellS(v) { return { v: v == null ? "" : String(v), t: "s" }; }
+  function cellN(v) { return { v: Number(v) || 0, t: "n" }; }
+  function weekKey(dateStr) {
+    const [y, m, d] = dateStr.split("-").map(Number);
+    const utc = Date.UTC(y, m - 1, d);
+    const dt = new Date(utc);
+    const dayNum = dt.getUTCDay() || 7;
+    dt.setUTCDate(dt.getUTCDate() + 4 - dayNum);
+    const yearStart = new Date(Date.UTC(dt.getUTCFullYear(), 0, 1));
+    const weekNo = Math.ceil((((dt - yearStart) / 86400000) + 1) / 7);
+    return `${dt.getUTCFullYear()}-W${pad2(weekNo)}`;
+  }
+
+  async function exportXlsx() {
+    const all = allHistorySorted();
+    const exportDate = partsInHK().dateStr;
+    const detailHeader = ["日期", "開始", "結束", "地點", "分類", "時長", "折算人工(HK$)"].map(cellS);
+    const detailRows = [detailHeader];
+    for (const h of all) {
+      const a = partsInHK(new Date(h.startMs));
+      const b = partsInHK(new Date(h.endMs));
+      detailRows.push([
+        cellS(h.date), cellS(a.hm), cellS(b.hm), cellS(h.place), cellS(h.category),
+        cellS(formatHMS(h.durationSec)), cellN(+(h.earn || 0).toFixed(2)),
+      ]);
+    }
+    const byDay = {};
+    for (const h of all) { if (!byDay[h.date]) byDay[h.date] = []; byDay[h.date].push(h); }
+    const days = Object.keys(byDay).sort();
+    const cats = [...new Set(all.map((h) => h.category || "未分類"))].sort();
+    const sumHeader = ["日期", "總計時", "總計時(秒)", "折算人工(HK$)", "筆數", ...cats.map((c) => c + " 時長"), ...cats.map((c) => c + " 人工")].map(cellS);
+    const sumRows = [sumHeader];
+    for (const d of days) {
+      const sum = summarizeSessions(byDay[d]);
+      const row = [cellS(d), cellS(formatHMS(sum.totalSec)), cellN(sum.totalSec), cellN(+sum.totalEarn.toFixed(2)), cellN(byDay[d].length)];
+      for (const c of cats) row.push(cellS(formatHMS((sum.byCat[c] && sum.byCat[c].sec) || 0)));
+      for (const c of cats) row.push(cellN(+(((sum.byCat[c] && sum.byCat[c].earn) || 0)).toFixed(2)));
+      sumRows.push(row);
+    }
+    const cumHeader = ["日期", "當日計時", "當日人工", "累積計時", "累積人工", "累積小時"].map(cellS);
+    const cumRows = [cumHeader];
+    let runSec = 0, runEarn = 0;
+    for (const d of days) {
+      const sum = summarizeSessions(byDay[d]);
+      runSec += sum.totalSec; runEarn += sum.totalEarn;
+      cumRows.push([
+        cellS(d), cellS(formatHMS(sum.totalSec)), cellN(+sum.totalEarn.toFixed(2)),
+        cellS(formatHMS(runSec)), cellN(+runEarn.toFixed(2)), cellN(+(runSec / 3600).toFixed(4)),
+      ]);
+    }
+    cumRows.push([cellS(""), cellS(""), cellS(""), cellS(""), cellS(""), cellS("")]);
+    cumRows.push([
+      cellS("合計"), cellS(formatHMS(runSec)), cellN(+runEarn.toFixed(2)),
+      cellS(formatHMS(runSec)), cellN(+runEarn.toFixed(2)), cellN(+(runSec / 3600).toFixed(4)),
+    ]);
+    const weekMap = {};
+    for (const d of days) {
+      const sum = summarizeSessions(byDay[d]);
+      const wk = weekKey(d);
+      if (!weekMap[wk]) weekMap[wk] = { sec: 0, earn: 0 };
+      weekMap[wk].sec += sum.totalSec; weekMap[wk].earn += sum.totalEarn;
+    }
+    cumRows.push([cellS(""), cellS(""), cellS(""), cellS(""), cellS(""), cellS("")]);
+    cumRows.push([cellS("按週匯總"), cellS("計時"), cellS("人工"), cellS(""), cellS(""), cellS("")]);
+    Object.keys(weekMap).sort().forEach((wk) => {
+      const w = weekMap[wk];
+      cumRows.push([cellS(wk), cellS(formatHMS(w.sec)), cellN(+w.earn.toFixed(2)), cellS(""), cellS(""), cellS("")]);
+    });
+    const monthMap = {};
+    for (const d of days) {
+      const sum = summarizeSessions(byDay[d]);
+      const mk = d.slice(0, 7);
+      if (!monthMap[mk]) monthMap[mk] = { sec: 0, earn: 0 };
+      monthMap[mk].sec += sum.totalSec; monthMap[mk].earn += sum.totalEarn;
+    }
+    cumRows.push([cellS(""), cellS(""), cellS(""), cellS(""), cellS(""), cellS("")]);
+    cumRows.push([cellS("按月匯總"), cellS("計時"), cellS("人工"), cellS(""), cellS(""), cellS("")]);
+    Object.keys(monthMap).sort().forEach((mk) => {
+      const m = monthMap[mk];
+      cumRows.push([cellS(mk), cellS(formatHMS(m.sec)), cellN(+m.earn.toFixed(2)), cellS(""), cellS(""), cellS("")]);
+    });
+
+    const sheetNames = ["明細", "每日摘要", "累積"];
+    const sheets = [detailRows, sumRows, cumRows];
+    const contentTypes = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
+  ${sheets.map((_, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join("\n  ")}
+</Types>`;
+    const rels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>
+</Relationships>`;
+    const wbRels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  ${sheets.map((_, i) => `<Relationship Id="rId${i + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i + 1}.xml"/>`).join("\n  ")}
+</Relationships>`;
+    const workbook = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+ xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <sheets>
+    ${sheetNames.map((n, i) => `<sheet name="${xmlEscape(n)}" sheetId="${i + 1}" r:id="rId${i + 1}"/>`).join("\n    ")}
+  </sheets>
+</workbook>`;
+    const files = [
+      { name: "[Content_Types].xml", data: contentTypes },
+      { name: "_rels/.rels", data: rels },
+      { name: "xl/workbook.xml", data: workbook },
+      { name: "xl/_rels/workbook.xml.rels", data: wbRels },
+    ];
+    sheets.forEach((rows, i) => {
+      files.push({ name: `xl/worksheets/sheet${i + 1}.xml`, data: sheetXml(rows) });
+    });
+    const zipBytes = await buildZip(files);
+    downloadBlob(
+      `quiet-workday-累積-${exportDate}.xlsx`,
+      new Blob([zipBytes], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" })
+    );
+    toast(`已匯出 Excel 累積報表（${all.length} 筆）`);
+  }
+
+  function normalizeImportedSession(raw) {
+    let date = raw.date || raw["日期"] || "";
+    let start = raw.start || raw["開始"] || raw.startHm || "";
+    let end = raw.end || raw["結束"] || raw.endHm || "";
+    let place = raw.place || raw["地點"] || DEFAULTS.place;
+    let category = raw.category || raw["分類"] || DEFAULTS.category;
+    let durationSec = raw.durationSec;
+    let earn = raw.earn != null ? Number(raw.earn) : Number(raw["折算人工(HK$)"] || raw["折算人工"] || 0);
+    let startMs = raw.startMs;
+    let endMs = raw.endMs;
+    date = String(date).trim().slice(0, 10);
+    start = String(start).trim().slice(0, 5);
+    end = String(end).trim().slice(0, 5);
+    if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return null;
+    if (!start) return null;
+    if (!end) end = start;
+    if (!startMs) startMs = hkWallToUtcMs(date, start.length === 5 ? start + ":00" : start);
+    if (!endMs) endMs = hkWallToUtcMs(date, end.length === 5 ? end + ":00" : end);
+    if (endMs < startMs) endMs = startMs;
+    if (durationSec == null) {
+      if (raw.duration || raw["時長"]) durationSec = parseHMS(raw.duration || raw["時長"]);
+      else durationSec = Math.max(0, Math.floor((endMs - startMs) / 1000));
+    }
+    if (!Number.isFinite(earn)) earn = hourly() * (durationSec / 3600);
+    return {
+      id: raw.id || (`imp-${date}-${startMs}-${endMs}`),
+      date, startMs, endMs, place: String(place), category: String(category),
+      durationSec: Math.max(0, Math.floor(Number(durationSec) || 0)),
+      earn: Math.max(0, Number(earn) || 0),
+    };
+  }
+  function mergeSessions(incoming) {
+    const map = new Map();
+    for (const h of state.history) map.set(sessionKey(h), h);
+    let added = 0, skipped = 0;
+    for (const raw of incoming) {
+      const h = normalizeImportedSession(raw);
+      if (!h) { skipped++; continue; }
+      const k = sessionKey(h);
+      if (map.has(k)) { skipped++; continue; }
+      map.set(k, h); added++;
+    }
+    state.history = [...map.values()].sort((a, b) => b.startMs - a.startMs);
+    saveState(); renderHistory(); renderGallery();
+    return { added, skipped, total: state.history.length };
+  }
+  async function handleImportFile(file) {
+    const name = (file.name || "").toLowerCase();
+    try {
+      if (name.endsWith(".json") || file.type === "application/json") {
+        const text = await file.text();
+        const data = JSON.parse(text);
+        let list = [];
+        if (Array.isArray(data)) list = data;
+        else if (Array.isArray(data.allSessions)) list = data.allSessions;
+        else if (Array.isArray(data.daySessions)) list = data.daySessions;
+        else if (Array.isArray(data.sessions)) list = data.sessions;
+        else if (Array.isArray(data.history)) list = data.history;
+        else throw new Error("JSON 內找不到 sessions 陣列");
+        const r = mergeSessions(list);
+        toast(`導入完成：新增 ${r.added}，略過 ${r.skipped}`);
+        return;
+      }
+      if (name.endsWith(".csv") || file.type === "text/csv") {
+        const text = await file.text();
+        const list = parseCsvSessions(text);
+        const r = mergeSessions(list);
+        toast(`導入完成：新增 ${r.added}，略過 ${r.skipped}`);
+        return;
+      }
+      const buf = new Uint8Array(await file.arrayBuffer());
+      const list = await parseXlsxSessions(buf);
+      const r = mergeSessions(list);
+      toast(`導入完成：新增 ${r.added}，略過 ${r.skipped}`);
+    } catch (e) {
+      console.error(e);
+      toast("導入失敗：" + (e.message || e));
+    }
+  }
+  function parseCsvSessions(text) {
+    const lines = text.replace(/^\uFEFF/, "").split(/\r?\n/).filter((l) => l.trim());
+    if (!lines.length) return [];
+    const headers = splitCsvLine(lines[0]).map((h) => h.trim());
+    const out = [];
+    for (let i = 1; i < lines.length; i++) {
+      const cols = splitCsvLine(lines[i]);
+      const row = {};
+      headers.forEach((h, idx) => { row[h] = cols[idx]; });
+      out.push(row);
+    }
+    return out;
+  }
+  function splitCsvLine(line) {
+    const res = []; let cur = ""; let q = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (q) {
+        if (ch === '"' && line[i + 1] === '"') { cur += '"'; i++; }
+        else if (ch === '"') q = false;
+        else cur += ch;
+      } else {
+        if (ch === '"') q = true;
+        else if (ch === ",") { res.push(cur); cur = ""; }
+        else cur += ch;
+      }
+    }
+    res.push(cur); return res;
+  }
+  async function parseXlsxSessions(buf) {
+    const files = parseZip(buf);
+    const sheet1 = await zipReadText(files, "xl/worksheets/sheet1.xml");
+    if (!sheet1) throw new Error("找不到工作表");
+    const sstXml = await zipReadText(files, "xl/sharedStrings.xml");
+    const sst = sstXml ? parseSharedStrings(sstXml) : [];
+    const rows = parseSheetRows(sheet1, sst);
+    if (!rows.length) return [];
+    const headers = rows[0].map((c) => String(c || "").trim());
+    const out = [];
+    for (let i = 1; i < rows.length; i++) {
+      const row = {};
+      headers.forEach((h, idx) => { row[h] = rows[i][idx]; });
+      if (!row["日期"] && !row.date) continue;
+      if (String(row["日期"] || "") === "合計") continue;
+      out.push(row);
+    }
+    return out;
+  }
+  function parseSharedStrings(xml) {
+    const out = [];
+    const re = /<si>([\s\S]*?)<\/si>/g;
+    let m;
+    while ((m = re.exec(xml))) {
+      const texts = [];
+      const tre = /<t[^>]*>([\s\S]*?)<\/t>/g;
+      let tm;
+      while ((tm = tre.exec(m[1]))) texts.push(decodeXml(tm[1]));
+      out.push(texts.join(""));
+    }
+    return out;
+  }
+  function decodeXml(s) {
+    return s.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&quot;/g,'"').replace(/&apos;/g,"'").replace(/&amp;/g,"&");
+  }
+  function parseSheetRows(xml, sst) {
+    const rows = [];
+    const rowRe = /<row[^>]*>([\s\S]*?)<\/row>/g;
+    let rm;
+    while ((rm = rowRe.exec(xml))) {
+      const cells = {}; let maxCol = -1;
+      const cellRe = /<c r="([A-Z]+)(\d+)"([^>]*)>([\s\S]*?)<\/c>|<c r="([A-Z]+)(\d+)"([^>]*)\/>/g;
+      let cm;
+      while ((cm = cellRe.exec(rm[1]))) {
+        const colLetters = cm[1] || cm[5];
+        const attrs = cm[3] || cm[7] || "";
+        const body = cm[4] || "";
+        const col = colLettersToIndex(colLetters);
+        maxCol = Math.max(maxCol, col);
+        let val = "";
+        if (/t="inlineStr"/.test(attrs)) {
+          const tm = body.match(/<t[^>]*>([\s\S]*?)<\/t>/);
+          val = tm ? decodeXml(tm[1]) : "";
+        } else if (/t="s"/.test(attrs)) {
+          const vm = body.match(/<v>([\s\S]*?)<\/v>/);
+          const idx = vm ? parseInt(vm[1], 10) : -1;
+          val = idx >= 0 ? (sst[idx] || "") : "";
+        } else {
+          const vm = body.match(/<v>([\s\S]*?)<\/v>/);
+          val = vm ? vm[1] : "";
+        }
+        cells[col] = val;
+      }
+      const arr = [];
+      for (let i = 0; i <= maxCol; i++) arr.push(cells[i] != null ? cells[i] : "");
+      rows.push(arr);
+    }
+    return rows;
+  }
+  function colLettersToIndex(letters) {
+    let n = 0;
+    for (let i = 0; i < letters.length; i++) n = n * 26 + (letters.charCodeAt(i) - 64);
+    return n - 1;
+  }
+
+  function buildDayCardCanvas(dateStr) {
+    const items = historyForDate(dateStr);
+    const sum = summarizeSessions(items);
+    const ws = dayWorkStats(dateStr);
+    const W = 720;
+    const listMax = 12;
+    const shown = items.slice(0, listMax);
+    const extra = items.length - shown.length;
+    const lineH = 28;
+    const headerH = 210;
+    const footH = 90;
+    const H = headerH + Math.max(shown.length, 1) * lineH + footH + (extra > 0 ? 24 : 0) + 40;
+    const canvas = document.createElement("canvas");
+    canvas.width = W; canvas.height = H;
+    const ctx = canvas.getContext("2d");
+    const ff = getComputedStyle(document.body).fontFamily;
+    ctx.fillStyle = "#e8e8e8"; ctx.fillRect(0, 0, W, H);
+    roundRect(ctx, 24, 24, W - 48, H - 48, 24);
+    ctx.fillStyle = "#ffffff"; ctx.fill();
+    let y = 56;
+    ctx.fillStyle = "#8a8a8a";
+    ctx.font = "600 11px " + ff;
+    ctx.fillText("THE QUIET WORKDAY", 48, y);
+    y += 28;
+    ctx.fillStyle = "#1a1a1a";
+    ctx.font = "700 32px " + ff;
+    ctx.fillText("小時計", 48, y);
+    ctx.font = "500 13px " + ff;
+    const badge = "低調記錄";
+    const badgeFull = "🐍 " + badge;
+    const bw = ctx.measureText(badgeFull).width + 24;
+    roundRect(ctx, W - 48 - bw, 48, bw, 28, 14);
+    ctx.fillStyle = "#f5f5f5"; ctx.fill();
+    ctx.fillStyle = "#1a1a1a";
+    ctx.fillText(badgeFull, W - 48 - bw + 12, 67);
+    y += 28;
+    ctx.fillStyle = "#8a8a8a";
+    ctx.font = "400 14px " + ff;
+    ctx.fillText("香港時間 · " + dateStr, 48, y);
+    y += 22;
+    ctx.fillText(state.workStart + " 上班 → " + state.workEnd + " 放工 · 進度 " + ws.pct.toFixed(1) + "%", 48, y);
+    y += 26;
+    ctx.fillStyle = "#2d5a3d";
+    ctx.font = "700 26px " + ff;
+    ctx.fillText(formatMoney(ws.converted), 48, y);
+    ctx.fillStyle = "#1a1a1a";
+    ctx.font = "600 16px " + ff;
+    const hourlyTxt = "時薪 " + formatMoney(ws.rate);
+    ctx.fillText(hourlyTxt, W - 48 - ctx.measureText(hourlyTxt).width, y);
+    y += 18;
+    ctx.fillStyle = "#ececec";
+    roundRect(ctx, 48, y, W - 96, 8, 4); ctx.fill();
+    ctx.fillStyle = "#2d5a3d";
+    roundRect(ctx, 48, y, (W - 96) * Math.min(1, ws.pct / 100), 8, 4); ctx.fill();
+    y += 36;
+    ctx.fillStyle = "#8a8a8a";
+    ctx.font = "600 12px " + ff;
+    ctx.fillText("今日計時紀錄", 48, y);
+    y += 18;
+    if (!shown.length) {
+      ctx.fillStyle = "#b0b0b0";
+      ctx.font = "400 14px " + ff;
+      ctx.fillText("未有儲存的計時", 48, y + 8);
+      y += lineH;
+    } else {
+      for (const h of shown) {
+        const a = partsInHK(new Date(h.startMs));
+        const b = partsInHK(new Date(h.endMs));
+        ctx.fillStyle = "#1a1a1a";
+        ctx.font = "500 14px " + ff;
+        const left = a.hm + "–" + b.hm + "  " + h.place + " · " + h.category;
+        ctx.fillText(truncate(ctx, left, W - 200), 48, y + 14);
+        ctx.fillStyle = "#2d5a3d";
+        ctx.font = "600 13px " + ff;
+        const right = formatHMS(h.durationSec) + "  " + formatMoney(h.earn);
+        ctx.fillText(right, W - 48 - ctx.measureText(right).width, y + 14);
+        y += lineH;
+      }
+      if (extra > 0) {
+        ctx.fillStyle = "#b0b0b0";
+        ctx.font = "400 12px " + ff;
+        ctx.fillText("…另有 " + extra + " 筆未列出", 48, y + 10);
+        y += 24;
+      }
+    }
+    y = H - 70;
+    ctx.strokeStyle = "#f0f0f0";
+    ctx.beginPath(); ctx.moveTo(48, y - 16); ctx.lineTo(W - 48, y - 16); ctx.stroke();
+    ctx.fillStyle = "#1a1a1a";
+    ctx.font = "600 15px " + ff;
+    ctx.fillText("合計計時 " + formatHMS(sum.totalSec), 48, y);
+    ctx.fillStyle = "#2d5a3d";
+    const tot = formatMoney(sum.totalEarn);
+    ctx.fillText(tot, W - 48 - ctx.measureText(tot).width, y);
+    ctx.fillStyle = "#b0b0b0";
+    ctx.font = "400 11px " + ff;
+    ctx.fillText("Quiet Workday · local only", 48, y + 22);
+    return canvas;
+  }
+  function truncate(ctx, text, maxW) {
+    if (ctx.measureText(text).width <= maxW) return text;
+    while (text.length > 1 && ctx.measureText(text + "…").width > maxW) text = text.slice(0, -1);
+    return text + "…";
+  }
+  function roundRect(ctx, x, y, w, h, r) {
+    const rr = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + rr, y);
+    ctx.arcTo(x + w, y, x + w, y + h, rr);
+    ctx.arcTo(x + w, y + h, x, y + h, rr);
+    ctx.arcTo(x, y + h, x, y, rr);
+    ctx.arcTo(x, y, x + w, y, rr);
+    ctx.closePath();
+  }
+  function saveDayImage(dateStr, opts) {
+    opts = opts || {};
+    const download = opts.download !== false;
+    const silent = !!opts.silent;
+    const canvas = buildDayCardCanvas(dateStr);
+    const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+    const items = historyForDate(dateStr);
+    const sum = summarizeSessions(items);
+    const ws = dayWorkStats(dateStr);
+    imageStore[dateStr] = {
+      date: dateStr, thumb: dataUrl, savedAt: Date.now(),
+      summary: {
+        totalSec: sum.totalSec, totalEarn: +sum.totalEarn.toFixed(2),
+        progressPct: +ws.pct.toFixed(1), converted: +ws.converted.toFixed(2),
+        sessions: items.length,
+      },
+    };
+    saveImages();
+    renderGallery();
+    if (download) {
+      canvas.toBlob(function (blob) {
+        if (!blob) return;
+        downloadBlob("quiet-workday-" + dateStr + ".png", blob);
+      }, "image/png");
+    }
+    if (!silent) toast(download ? "已儲存並下載今日圖片" : "已記錄今日圖片");
+  }
+  function maybeAutoSnapshot(dateStr, silent) {
+    if (!dateStr) return;
+    try { saveDayImage(dateStr, { download: false, silent: !!silent }); }
+    catch (e) { console.warn(e); }
+  }
+  function renderGallery() {
+    const dates = Object.keys(imageStore).sort().reverse();
+    if (!dates.length) {
+      els.galleryList.className = "gallery";
+      els.galleryList.innerHTML = '<div class="gallery-empty" style="grid-column:1/-1">未有圖片紀錄</div>';
+      return;
+    }
+    els.galleryList.className = "gallery";
+    els.galleryList.innerHTML = dates.map(function (d) {
+      const it = imageStore[d];
+      const s = it.summary || {};
+      return '<div class="gallery-item" data-date="' + escapeHtml(d) + '">' +
+        '<img alt="' + escapeHtml(d) + '" src="' + it.thumb + '" loading="lazy" />' +
+        '<div class="gallery-meta"><div class="gallery-date">' + escapeHtml(d) +
+        (s.sessions != null ? (" · " + s.sessions + " 筆") : "") + "</div>" +
+        '<div class="gallery-btns">' +
+        '<button type="button" class="dl" data-act="dl">下載</button>' +
+        '<button type="button" class="rm" data-act="rm">刪除</button>' +
+        "</div></div></div>";
     }).join("");
   }
 
-  function escapeHtml(s) {
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
-  function clearTodayHistory() {
-    const today = partsInHK().dateStr;
-    state.history = state.history.filter((h) => h.date !== today);
-    saveState();
-    renderHistory();
-  }
-
-  // ---------- Events ----------
   els.btnStart.addEventListener("click", startSession);
   els.btnStop.addEventListener("click", stopAndSave);
-  els.btnClearHistory.addEventListener("click", clearTodayHistory);
-
-  ["change", "input"].forEach((ev) => {
+  els.btnClearHistory.addEventListener("click", clearDayHistory);
+  els.btnExportCsv.addEventListener("click", exportCsv);
+  els.btnExportJson.addEventListener("click", exportJson);
+  els.btnExportXlsx.addEventListener("click", function () {
+    exportXlsx().catch(function (e) { console.error(e); toast("Excel 匯出失敗"); });
+  });
+  els.btnImport.addEventListener("click", function () { els.importFile.click(); });
+  els.importFile.addEventListener("change", function () {
+    const f = els.importFile.files && els.importFile.files[0];
+    els.importFile.value = "";
+    if (f) handleImportFile(f);
+  });
+  els.btnSaveImage.addEventListener("click", function () {
+    saveDayImage(selectedReportDate(), { download: true });
+  });
+  els.btnRecordToday.addEventListener("click", function () {
+    const d = partsInHK().dateStr;
+    els.reportDate.value = d;
+    saveDayImage(d, { download: false });
+    renderHistory();
+  });
+  els.galleryList.addEventListener("click", function (e) {
+    const btn = e.target.closest("button[data-act]");
+    if (!btn) return;
+    const item = btn.closest(".gallery-item");
+    if (!item) return;
+    const d = item.getAttribute("data-date");
+    if (btn.getAttribute("data-act") === "dl") saveDayImage(d, { download: true });
+    else if (btn.getAttribute("data-act") === "rm") {
+      delete imageStore[d]; saveImages(); renderGallery(); toast("已刪除 " + d);
+    }
+  });
+  els.reportDate.addEventListener("change", function () { renderHistory(); });
+  ["change", "input"].forEach(function (ev) {
     els.cfgStart.addEventListener(ev, readSettingsFromForm);
     els.cfgEnd.addEventListener(ev, readSettingsFromForm);
     els.cfgSalary.addEventListener(ev, readSettingsFromForm);
     els.cfgHours.addEventListener(ev, readSettingsFromForm);
   });
-
-  els.inputPlace.addEventListener("change", () => {
+  els.inputPlace.addEventListener("change", function () {
     state.place = (els.inputPlace.value || "").trim() || DEFAULTS.place;
     if (state.session) state.session.place = state.place;
-    saveState();
-    tick();
+    saveState(); tick();
   });
-
-  els.inputCategory.addEventListener("change", () => {
+  els.inputCategory.addEventListener("change", function () {
     state.category = els.inputCategory.value || DEFAULTS.category;
     if (state.session) state.session.category = state.category;
-    saveState();
-    tick();
+    saveState(); tick();
   });
-
-  els.inputStartTime.addEventListener("change", () => {
+  els.inputStartTime.addEventListener("change", function () {
     if (!state.session) return;
     const p = partsInHK();
     const picked = els.inputStartTime.value;
     if (!picked) return;
     state.session.startedAt = hkWallToUtcMs(p.dateStr, picked + ":00");
-    saveState();
-    tick();
+    saveState(); tick();
   });
 
-  // ---------- Boot ----------
   applySettingsToForm();
   const boot = partsInHK();
-  if (!els.inputStartTime.value) {
-    if (state.session) {
-      els.inputStartTime.value = partsInHK(new Date(state.session.startedAt)).hm;
-    } else {
-      els.inputStartTime.value = boot.hm;
-    }
-  }
+  els.reportDate.value = boot.dateStr;
+  if (state.session) els.inputStartTime.value = partsInHK(new Date(state.session.startedAt)).hm;
+  else els.inputStartTime.value = boot.hm;
+  if (!state.lastImageDate) { state.lastImageDate = boot.dateStr; saveState(); }
   renderHistory();
+  renderGallery();
   tick();
   setInterval(tick, 1000);
-
-  // Expose for quick console checks (optional)
-  window.__quietWorkday = {
-    hourly,
-    dayBoundsMs,
-    partsInHK,
-    state: () => state,
-  };
+  window.__quietWorkday = { hourly: hourly, dayBoundsMs: dayBoundsMs, partsInHK: partsInHK, state: function () { return state; }, imageStore: function () { return imageStore; } };
 })();
 </script>
 </body>
