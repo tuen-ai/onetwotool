@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#e8e8e8" />
+<title>THE QUIET WORKDAY · 小時計</title>
+<style>
+  :root {
+    --bg: #e8e8e8;
+    --card: #ffffff;
+    --ink: #1a1a1a;
+    --muted: #8a8a8a;
+    --faint: #b0b0b0;
+    --green: #2d5a3d;
+    --green-deep: #244a32;
+    --green-soft: #e8f0eb;
+    --bar-track: #ececec;
+    --radius: 18px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04);
+    --font: -apple-system, BlinkMacSystemFont, "PingFang HK", "PingFang TC",
+            "Hiragino Sans CNS", "Noto Sans TC", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    padding: 20px 16px 48px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 440px;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding: 0 2px;
+  }
+
+  .brand-en {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .brand-zh {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-top: 2px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--card);
+    border: 1px solid #e0e0e0;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--ink);
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+    margin-top: 4px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px 20px 18px;
+    box-shadow: var(--shadow);
+    margin-bottom: 14px;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .live-clock {
+    font-variant-numeric: tabular-nums;
+    color: var(--faint);
+    font-size: 12px;
+  }
+
+  .countdown {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .countdown-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+    margin-bottom: 18px;
+  }
+
+  .progress-wrap { margin-bottom: 6px; }
+
+  .progress-track {
+    height: 6px;
+    background: var(--bar-track);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 999px;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .progress-labels .pct {
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .earnings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 4px;
+  }
+
+  .earn-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .earn-value {
+    font-size: 26px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .earn-value.green { color: var(--green); }
+
+  .earn-note {
+    font-size: 11px;
+    color: var(--faint);
+    margin-top: 4px;
+  }
+
+  /* Session card */
+  .session-timer {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .task-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 18px;
+    gap: 12px;
+  }
+
+  .task-desc {
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .task-earn {
+    font-size: 14px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.05s;
+  }
+
+  .btn:active { transform: scale(0.99); }
+
+  .btn-primary {
+    background: var(--green);
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .btn-primary:hover { background: var(--green-deep); }
+
+  .btn-primary:disabled {
+    background: #9aada1;
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    background: #f0f0f0;
+    color: var(--ink);
+  }
+
+  .btn-secondary:hover { background: #e6e6e6; }
+
+  .status-text {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin: 12px 0 14px;
+  }
+
+  .fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .field input,
+  .field select {
+    width: 100%;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    background: #fafafa;
+    color: var(--ink);
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .field input[type="time"] {
+    min-height: 42px;
+  }
+
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238a8a8a' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+  }
+
+  .field input:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--green);
+    background: #fff;
+  }
+
+  .place-row {
+    margin-top: 10px;
+  }
+
+  .place-row .field { grid-column: 1 / -1; }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 8px 0 4px;
+  }
+
+  .empty-state .session-timer {
+    color: var(--faint);
+  }
+
+  .empty-hint {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  /* Settings disclosure */
+  .settings {
+    margin-top: 4px;
+    margin-bottom: 14px;
+  }
+
+  .settings summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--muted);
+    padding: 6px 4px;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .settings summary::-webkit-details-marker { display: none; }
+
+  .settings summary::before {
+    content: "⚙";
+    font-size: 13px;
+  }
+
+  .settings[open] summary { color: var(--ink); margin-bottom: 8px; }
+
+  .settings-body {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .settings-body .field.full { grid-column: 1 / -1; }
+
+  .settings-hint {
+    grid-column: 1 / -1;
+    font-size: 11px;
+    color: var(--faint);
+    margin-top: 2px;
+  }
+
+  /* History */
+  .history-card h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .history-empty {
+    font-size: 13px;
+    color: var(--faint);
+    text-align: center;
+    padding: 12px 0;
+  }
+
+  .history-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    padding: 12px 0;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .history-item:first-of-type { border-top: none; }
+
+  .hist-title {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .hist-meta {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .hist-earn {
+    font-size: 14px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  .hist-dur {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: right;
+  }
+
+  .btn-clear {
+    margin-top: 8px;
+    background: transparent;
+    border: none;
+    color: var(--faint);
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    width: 100%;
+    padding: 8px;
+  }
+
+  .btn-clear:hover { color: var(--muted); }
+
+  @media (max-width: 380px) {
+    .countdown, .session-timer { font-size: 40px; }
+    .earn-value { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="header">
+    <div>
+      <div class="brand-en">THE QUIET WORKDAY</div>
+      <div class="brand-zh">小時計</div>
+    </div>
+    <div class="badge">🐍 低調記錄</div>
+  </header>
+
+  <!-- Workday overview -->
+  <section class="card" id="overviewCard">
+    <div class="meta-row">
+      <span id="hkDateLabel">香港時間 · —</span>
+      <span class="live-clock" id="liveClock">--:--:--</span>
+    </div>
+    <div class="countdown" id="countdown">--:--:--</div>
+    <div class="countdown-sub" id="countdownSub">距離 — 放工</div>
+
+    <div class="progress-wrap">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-labels">
+        <span id="labelStart">07:10 上班</span>
+        <span class="pct" id="progressPct">0.0%</span>
+        <span id="labelEnd">15:40 放工</span>
+      </div>
+    </div>
+
+    <div class="earnings">
+      <div>
+        <div class="earn-label">今日已折算人工</div>
+        <div class="earn-value green" id="todayEarn">HK$0.00</div>
+      </div>
+      <div>
+        <div class="earn-label">平均每小時</div>
+        <div class="earn-value" id="hourlyRate">HK$0.00</div>
+        <div class="earn-note" id="salaryNote">月薪扣MPF後 HK$41,320</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Settings -->
+  <details class="settings" id="settingsPanel">
+    <summary>設定</summary>
+    <div class="settings-body">
+      <div class="field">
+        <label for="cfgStart">上班時間</label>
+        <input type="time" id="cfgStart" value="07:10" />
+      </div>
+      <div class="field">
+        <label for="cfgEnd">放工時間</label>
+        <input type="time" id="cfgEnd" value="15:40" />
+      </div>
+      <div class="field full">
+        <label for="cfgSalary">月薪扣MPF後（HKD）</label>
+        <input type="number" id="cfgSalary" min="0" step="1" value="41320" />
+      </div>
+      <div class="field full">
+        <label for="cfgHours">每月工時（用以計時薪）</label>
+        <input type="number" id="cfgHours" min="1" step="1" value="170" />
+      </div>
+      <p class="settings-hint">時薪 = 月薪 ÷ 每月工時。預設 41320 ÷ 170 ≈ HK$243.06。</p>
+    </div>
+  </details>
+
+  <!-- Session timer -->
+  <section class="card" id="sessionCard">
+    <div class="meta-row">
+      <span>目前計時</span>
+      <span id="sessionStartedAt">尚未開始</span>
+    </div>
+
+    <div id="sessionActive">
+      <div class="session-timer" id="sessionElapsed">00:00:00</div>
+      <div class="task-row">
+        <div class="task-desc" id="taskDesc">小音樂室 · 🐍 休息</div>
+        <div class="task-earn" id="sessionEarn">HK$0.00</div>
+      </div>
+      <button type="button" class="btn btn-primary" id="btnStop">結束並儲存</button>
+      <button type="button" class="btn btn-secondary" id="btnStart">開始新計時</button>
+      <div class="status-text" id="statusText">已開始計時</div>
+    </div>
+
+    <div class="fields">
+      <div class="field">
+        <label for="inputStartTime">開始時間</label>
+        <input type="time" id="inputStartTime" />
+      </div>
+      <div class="field">
+        <label for="inputCategory">分類</label>
+        <select id="inputCategory">
+          <option value="🐍 休息">🐍 休息</option>
+          <option value="🐍 工作">🐍 工作</option>
+          <option value="🐍 會議">🐍 會議</option>
+          <option value="🐍 雜務">🐍 雜務</option>
+        </select>
+      </div>
+    </div>
+    <div class="fields place-row">
+      <div class="field">
+        <label for="inputPlace">地點／任務名</label>
+        <input type="text" id="inputPlace" value="小音樂室" maxlength="40" />
+      </div>
+    </div>
+  </section>
+
+  <!-- History -->
+  <section class="card history-card" id="historyCard">
+    <h3>今日紀錄</h3>
+    <div id="historyList"><div class="history-empty">未有紀錄</div></div>
+    <button type="button" class="btn-clear" id="btnClearHistory" hidden>清除今日紀錄</button>
+  </section>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const TZ = "Asia/Hong_Kong";
+  const STORAGE_KEY = "quiet-workday-timer-v1";
+
+  const DEFAULTS = {
+    workStart: "07:10",
+    workEnd: "15:40",
+    monthlySalary: 41320,
+    monthlyHours: 170,
+    place: "小音樂室",
+    category: "🐍 休息",
+  };
+
+  /** @type {{
+   *   workStart: string, workEnd: string,
+   *   monthlySalary: number, monthlyHours: number,
+   *   place: string, category: string,
+   *   session: null | { startedAt: number, place: string, category: string },
+   *   history: Array<{id:string, date:string, startMs:number, endMs:number, place:string, category:string, durationSec:number, earn:number}>
+   * }} */
+  let state = loadState();
+
+  // DOM
+  const $ = (id) => document.getElementById(id);
+  const els = {
+    hkDateLabel: $("hkDateLabel"),
+    liveClock: $("liveClock"),
+    countdown: $("countdown"),
+    countdownSub: $("countdownSub"),
+    progressFill: $("progressFill"),
+    progressPct: $("progressPct"),
+    labelStart: $("labelStart"),
+    labelEnd: $("labelEnd"),
+    todayEarn: $("todayEarn"),
+    hourlyRate: $("hourlyRate"),
+    salaryNote: $("salaryNote"),
+    sessionStartedAt: $("sessionStartedAt"),
+    sessionElapsed: $("sessionElapsed"),
+    taskDesc: $("taskDesc"),
+    sessionEarn: $("sessionEarn"),
+    statusText: $("statusText"),
+    btnStop: $("btnStop"),
+    btnStart: $("btnStart"),
+    inputStartTime: $("inputStartTime"),
+    inputCategory: $("inputCategory"),
+    inputPlace: $("inputPlace"),
+    cfgStart: $("cfgStart"),
+    cfgEnd: $("cfgEnd"),
+    cfgSalary: $("cfgSalary"),
+    cfgHours: $("cfgHours"),
+    historyList: $("historyList"),
+    btnClearHistory: $("btnClearHistory"),
+  };
+
+  // ---------- Time helpers (HK) ----------
+  function partsInHK(date = new Date()) {
+    const fmt = new Intl.DateTimeFormat("en-CA", {
+      timeZone: TZ,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    });
+    const map = {};
+    for (const p of fmt.formatToParts(date)) {
+      if (p.type !== "literal") map[p.type] = p.value;
+    }
+    // en-CA hour12:false can yield "24" for midnight in some engines
+    let hour = map.hour;
+    if (hour === "24") hour = "00";
+    return {
+      year: map.year,
+      month: map.month,
+      day: map.day,
+      hour,
+      minute: map.minute,
+      second: map.second,
+      dateStr: `${map.year}-${map.month}-${map.day}`,
+      timeStr: `${hour}:${map.minute}:${map.second}`,
+      hm: `${hour}:${map.minute}`,
+    };
+  }
+
+  /** Build a Date representing YYYY-MM-DD HH:MM:SS in Asia/Hong_Kong */
+  function hkWallToUtcMs(dateStr, hmss) {
+    // HK is UTC+8 with no DST
+    const [y, mo, d] = dateStr.split("-").map(Number);
+    const parts = hmss.split(":").map(Number);
+    const h = parts[0] || 0;
+    const mi = parts[1] || 0;
+    const s = parts[2] || 0;
+    return Date.UTC(y, mo - 1, d, h - 8, mi, s);
+  }
+
+  function parseHm(hm) {
+    const [h, m] = hm.split(":").map(Number);
+    return { h: h || 0, m: m || 0 };
+  }
+
+  function pad2(n) {
+    return String(n).padStart(2, "0");
+  }
+
+  function formatHMS(totalSec) {
+    const sec = Math.max(0, Math.floor(totalSec));
+    const h = Math.floor(sec / 3600);
+    const m = Math.floor((sec % 3600) / 60);
+    const s = sec % 60;
+    return `${pad2(h)}:${pad2(m)}:${pad2(s)}`;
+  }
+
+  function formatMoney(n) {
+    const v = Math.max(0, Number(n) || 0);
+    return "HK$" + v.toLocaleString("en-HK", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+
+  function formatSalaryNote(n) {
+    const v = Math.round(Number(n) || 0);
+    return "月薪扣MPF後 HK$" + v.toLocaleString("en-HK");
+  }
+
+  function hourly() {
+    const hours = Number(state.monthlyHours) || 170;
+    return (Number(state.monthlySalary) || 0) / hours;
+  }
+
+  function dayBoundsMs(dateStr) {
+    const start = hkWallToUtcMs(dateStr, state.workStart + ":00");
+    const end = hkWallToUtcMs(dateStr, state.workEnd + ":00");
+    return { start, end, durationMs: end - start };
+  }
+
+  // ---------- Persistence ----------
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return baseState();
+      const parsed = JSON.parse(raw);
+      return {
+        ...baseState(),
+        ...parsed,
+        history: Array.isArray(parsed.history) ? parsed.history : [],
+        session: parsed.session || null,
+      };
+    } catch {
+      return baseState();
+    }
+  }
+
+  function baseState() {
+    return {
+      workStart: DEFAULTS.workStart,
+      workEnd: DEFAULTS.workEnd,
+      monthlySalary: DEFAULTS.monthlySalary,
+      monthlyHours: DEFAULTS.monthlyHours,
+      place: DEFAULTS.place,
+      category: DEFAULTS.category,
+      session: null,
+      history: [],
+    };
+  }
+
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      workStart: state.workStart,
+      workEnd: state.workEnd,
+      monthlySalary: state.monthlySalary,
+      monthlyHours: state.monthlyHours,
+      place: state.place,
+      category: state.category,
+      session: state.session,
+      history: state.history,
+    }));
+  }
+
+  // ---------- UI sync from settings ----------
+  function applySettingsToForm() {
+    els.cfgStart.value = state.workStart;
+    els.cfgEnd.value = state.workEnd;
+    els.cfgSalary.value = state.monthlySalary;
+    els.cfgHours.value = state.monthlyHours;
+    els.inputPlace.value = state.place || DEFAULTS.place;
+    els.inputCategory.value = state.category || DEFAULTS.category;
+    if (![...els.inputCategory.options].some((o) => o.value === els.inputCategory.value)) {
+      els.inputCategory.value = DEFAULTS.category;
+    }
+  }
+
+  function readSettingsFromForm() {
+    state.workStart = els.cfgStart.value || DEFAULTS.workStart;
+    state.workEnd = els.cfgEnd.value || DEFAULTS.workEnd;
+    state.monthlySalary = Math.max(0, Number(els.cfgSalary.value) || 0);
+    state.monthlyHours = Math.max(1, Number(els.cfgHours.value) || 170);
+    state.place = (els.inputPlace.value || "").trim() || DEFAULTS.place;
+    state.category = els.inputCategory.value || DEFAULTS.category;
+    saveState();
+    tick();
+  }
+
+  // ---------- Tick ----------
+  function tick() {
+    const now = new Date();
+    const p = partsInHK(now);
+    const nowMs = now.getTime();
+
+    els.hkDateLabel.textContent = `香港時間 · ${p.dateStr}`;
+    els.liveClock.textContent = p.timeStr;
+
+    const { start, end, durationMs } = dayBoundsMs(p.dateStr);
+    const dayHours = durationMs / 3600000;
+
+    // Countdown
+    const remainMs = end - nowMs;
+    if (remainMs >= 0) {
+      els.countdown.textContent = formatHMS(remainMs / 1000);
+      els.countdownSub.textContent = `距離 ${state.workEnd} 放工`;
+    } else {
+      els.countdown.textContent = formatHMS(Math.abs(remainMs) / 1000);
+      els.countdownSub.textContent = "已超過放工時間";
+    }
+
+    // Progress: elapsed since start, capped [0, 100]
+    let elapsedWorkMs = nowMs - start;
+    if (elapsedWorkMs < 0) elapsedWorkMs = 0;
+    if (elapsedWorkMs > durationMs) elapsedWorkMs = durationMs;
+    const pct = durationMs > 0 ? (elapsedWorkMs / durationMs) * 100 : 0;
+    els.progressFill.style.width = pct.toFixed(2) + "%";
+    els.progressPct.textContent = pct.toFixed(1) + "%";
+    els.labelStart.textContent = `${state.workStart} 上班`;
+    els.labelEnd.textContent = `${state.workEnd} 放工`;
+
+    // Earnings
+    const rate = hourly();
+    const workedHours = elapsedWorkMs / 3600000;
+    els.todayEarn.textContent = formatMoney(rate * workedHours);
+    els.hourlyRate.textContent = formatMoney(rate);
+    els.salaryNote.textContent = formatSalaryNote(state.monthlySalary);
+
+    // Session
+    updateSessionUI(nowMs, p, rate);
+
+    // Keep time picker default near "now" when idle
+    if (!state.session && document.activeElement !== els.inputStartTime) {
+      // don't fight user while editing
+    }
+  }
+
+  function updateSessionUI(nowMs, p, rate) {
+    const place = state.place || DEFAULTS.place;
+    const cat = state.category || DEFAULTS.category;
+
+    if (!state.session) {
+      els.sessionStartedAt.textContent = "尚未開始";
+      els.sessionElapsed.textContent = "00:00:00";
+      els.sessionElapsed.style.color = "var(--faint)";
+      els.taskDesc.textContent = `${place} · ${cat}`;
+      els.sessionEarn.textContent = "HK$0.00";
+      els.statusText.textContent = "未開始計時 — 按「開始新計時」";
+      els.btnStop.disabled = true;
+      return;
+    }
+
+    els.sessionElapsed.style.color = "";
+    const started = state.session.startedAt;
+    const elapsedSec = Math.max(0, (nowMs - started) / 1000);
+    const sp = partsInHK(new Date(started));
+    els.sessionStartedAt.textContent = `${sp.dateStr} ${sp.hm} 開始`;
+    els.sessionElapsed.textContent = formatHMS(elapsedSec);
+
+    const sPlace = state.session.place || place;
+    const sCat = state.session.category || cat;
+    els.taskDesc.textContent = `${sPlace} · ${sCat}`;
+    els.sessionEarn.textContent = formatMoney(rate * (elapsedSec / 3600));
+    els.statusText.textContent = "已開始計時";
+    els.btnStop.disabled = false;
+
+    // Sync inputs to active session (unless focused)
+    if (document.activeElement !== els.inputPlace) {
+      els.inputPlace.value = sPlace;
+    }
+    if (document.activeElement !== els.inputCategory) {
+      els.inputCategory.value = sCat;
+    }
+    if (document.activeElement !== els.inputStartTime) {
+      els.inputStartTime.value = sp.hm;
+    }
+  }
+
+  // ---------- Session actions ----------
+  function startSession() {
+    const p = partsInHK();
+    let startMs;
+
+    const picked = els.inputStartTime.value;
+    if (picked) {
+      startMs = hkWallToUtcMs(p.dateStr, picked + ":00");
+      // If picked time is in the future relative to now, still allow (user override)
+      // If more than 18h in the past on same calendar day weirdness, keep as-is
+    } else {
+      startMs = Date.now();
+    }
+
+    const place = (els.inputPlace.value || "").trim() || DEFAULTS.place;
+    const category = els.inputCategory.value || DEFAULTS.category;
+
+    state.place = place;
+    state.category = category;
+    state.session = {
+      startedAt: startMs,
+      place,
+      category,
+    };
+    saveState();
+    tick();
+  }
+
+  function stopAndSave() {
+    if (!state.session) return;
+    const nowMs = Date.now();
+    const startMs = state.session.startedAt;
+    let endMs = nowMs;
+    if (endMs < startMs) endMs = startMs;
+
+    const durationSec = Math.max(0, Math.floor((endMs - startMs) / 1000));
+    const earn = hourly() * (durationSec / 3600);
+    const sp = partsInHK(new Date(startMs));
+
+    state.history.unshift({
+      id: String(Date.now()) + "-" + Math.random().toString(36).slice(2, 7),
+      date: sp.dateStr,
+      startMs,
+      endMs,
+      place: state.session.place,
+      category: state.session.category,
+      durationSec,
+      earn,
+    });
+
+    // Keep last 100
+    if (state.history.length > 100) state.history = state.history.slice(0, 100);
+
+    state.session = null;
+    saveState();
+    renderHistory();
+    // Reset time picker to now for next start
+    const np = partsInHK();
+    els.inputStartTime.value = np.hm;
+    tick();
+  }
+
+  function renderHistory() {
+    const today = partsInHK().dateStr;
+    const items = state.history.filter((h) => h.date === today);
+
+    if (!items.length) {
+      els.historyList.innerHTML = '<div class="history-empty">未有紀錄</div>';
+      els.btnClearHistory.hidden = true;
+      return;
+    }
+
+    els.btnClearHistory.hidden = false;
+    els.historyList.innerHTML = items.map((h) => {
+      const a = partsInHK(new Date(h.startMs));
+      const b = partsInHK(new Date(h.endMs));
+      return `
+        <div class="history-item">
+          <div>
+            <div class="hist-title">${escapeHtml(h.place)} · ${escapeHtml(h.category)}</div>
+            <div class="hist-meta">${a.hm} – ${b.hm}</div>
+          </div>
+          <div>
+            <div class="hist-earn">${formatMoney(h.earn)}</div>
+            <div class="hist-dur">${formatHMS(h.durationSec)}</div>
+          </div>
+        </div>`;
+    }).join("");
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function clearTodayHistory() {
+    const today = partsInHK().dateStr;
+    state.history = state.history.filter((h) => h.date !== today);
+    saveState();
+    renderHistory();
+  }
+
+  // ---------- Events ----------
+  els.btnStart.addEventListener("click", startSession);
+  els.btnStop.addEventListener("click", stopAndSave);
+  els.btnClearHistory.addEventListener("click", clearTodayHistory);
+
+  ["change", "input"].forEach((ev) => {
+    els.cfgStart.addEventListener(ev, readSettingsFromForm);
+    els.cfgEnd.addEventListener(ev, readSettingsFromForm);
+    els.cfgSalary.addEventListener(ev, readSettingsFromForm);
+    els.cfgHours.addEventListener(ev, readSettingsFromForm);
+  });
+
+  els.inputPlace.addEventListener("change", () => {
+    state.place = (els.inputPlace.value || "").trim() || DEFAULTS.place;
+    if (state.session) state.session.place = state.place;
+    saveState();
+    tick();
+  });
+
+  els.inputCategory.addEventListener("change", () => {
+    state.category = els.inputCategory.value || DEFAULTS.category;
+    if (state.session) state.session.category = state.category;
+    saveState();
+    tick();
+  });
+
+  els.inputStartTime.addEventListener("change", () => {
+    if (!state.session) return;
+    const p = partsInHK();
+    const picked = els.inputStartTime.value;
+    if (!picked) return;
+    state.session.startedAt = hkWallToUtcMs(p.dateStr, picked + ":00");
+    saveState();
+    tick();
+  });
+
+  // ---------- Boot ----------
+  applySettingsToForm();
+  const boot = partsInHK();
+  if (!els.inputStartTime.value) {
+    if (state.session) {
+      els.inputStartTime.value = partsInHK(new Date(state.session.startedAt)).hm;
+    } else {
+      els.inputStartTime.value = boot.hm;
+    }
+  }
+  renderHistory();
+  tick();
+  setInterval(tick, 1000);
+
+  // Expose for quick console checks (optional)
+  window.__quietWorkday = {
+    hourly,
+    dayBoundsMs,
+    partsInHK,
+    state: () => state,
+  };
+})();
+</script>
+</body>
+</html>
